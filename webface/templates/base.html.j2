@@ -22,9 +22,31 @@
   <p><img src="{{ url_for('static', filename='flask-icon.png') }}" /></p>
   <ul>
     <li><a href="{{ url_for('index') }}">Index</a></li>
-    <li><a href="{{ url_for('info') }}">Info</a></li>
+    <li><a href="{{ url_for('add') }}">Nový uživatel</a></li>
     <li><a href="{{ url_for('abc') }}">ABC</a></li>
+    <li><a href="{{ url_for('login') }}">Login</a></li>
   </ul></nav>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="messages">
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+      <p class="{{category}}">{{ message }}</p>
+    {% endfor %}  
+  </div>
+  {% endif %}
+  {% endwith %}
+
+
+<p class="loggedin">
+{% if 'nick' in session  %}
+Jsi přihlášen jako <strong>{{ session.get('nick') }}</strong>.
+<a href="{{ url_for('logout') }}">Odhlásit</a>
+{% else %}
+Nejsi přihlášen.
+<a href="{{ url_for('login') }}">Přihlásit</a>
+{% endif %}
+</p>
 
 
 {% block obsah %}

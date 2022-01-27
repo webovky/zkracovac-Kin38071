@@ -59,5 +59,24 @@ footer {
     background-color: lightblue;
 }
 
+.messages {
+  font-size: 150%;
+  margin-top: 2em;
+  padding: 1em;
+  background-color: white;
+}
+
+.error {
+  color:red;
+}
+
+.success {
+  color: green
+}
+
+.loggedin {
+  font-size: large;
+  font-weight: bold;
+}
 
 /*# sourceMappingURL=styles.css.map */
