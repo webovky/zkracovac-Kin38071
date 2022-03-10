@@ -10,5 +10,4 @@ app.secret_key = (
 )
 
 from . import routes
-
 from . import models
