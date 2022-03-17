@@ -34,7 +34,8 @@ def index():
     if 'nick' in session:
         user = User.get(nick=session["nick"])
         addresses = Addresses.select(lambda a: a.user == user)
-    return render_template("base.html.j2", shorcut=shorcut, addresses=list(addresses))
+        return render_template("base.html.j2", shorcut=shorcut, addresses=list(addresses))
+    return render_template("base.html.j2", shorcut=shorcut)
 
 
 @app.route("/", methods=["POST"])
@@ -63,6 +64,17 @@ def index_post():
     else:
         return redirect(url_for("index"))
 
+
+@app.route("/remove/", methods=["POST"])
+@db_session
+def remove_post():
+    if 'nick' in session:
+        rmid = request.form.get("rmid")
+        user = User.get(nick=session['nick'])
+        addr = Addresses.get(id=rmid, user=user)
+        if addr:
+          addr.delete()
+    return redirect(url_for("index"))
 
 @app.route("/<path:shorcut>/", methods=["GET"])
 @db_session
